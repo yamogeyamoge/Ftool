@@ -86,48 +86,18 @@ function pcst() {
 //writeImage関数を作れば画像の表示もできそう
 function writeText(t, f) {
 	flag = 1;
-    if (cnt > t.length) {
-	//文を読み込む前
-	cnt = 0;
-	nxt = setInterval("nextMark(str)", msgsp*5);
-	//文字を一文字ずつ表示するようインターバルをセット
-	return;
-    }
-    
-    cnt++;
-    str = t.substring(0, cnt);
+    str = t;
     world.innerHTML = str;
+	//sleep();
 	//cntの数だけ文字を表示
-    
-    func = "writeText(" + f + ", \"" + f + "\");";
-    setTimeout(func, msgsp);
-    
     world.onclick = function() {
-	if(cnt !== 0) {
-	    cnt = t.length;
-		//クリックされたとき文章がすべて表示されてなければすべて表示
-	}else {
 		//一文を読み込み終わったので諸々初期化
-	    clearInterval(nxt);
-	    flag = 0;
+		flag = 0;
 	    nm = 0;
 	    pc++;
 	}
-    };
 }
 
-function nextMark(str) {
-    if(nm === 0) {
-	str += "▽";
-	nm = 1;
-	//▽を文字列に追加
-    }else {
-	str = str.substring(0, str.length);
-	nm = 0;
-    }
-    world.innerHTML = str;
-    return;
-}
 
 function writeImage(t) {
     flag = 1;
@@ -136,8 +106,19 @@ function writeImage(t) {
 	world.innerHTML = '<img src='+t+' alt="サンプル画像">';
 	//tは変数なので"t"ではなく+t+で追加する
 	world=document.getElementById(id);
-	clearInterval(nxt);
 	flag = 0;
 	nm = 0;
 	pc++;
+}
+
+function sleep(){
+	var huga = 0;
+	var hoge = setInterval(function() {
+	    console.log(huga);
+	    huga++;
+	    //終了条件
+	    if (huga == 3) {
+	    clearInterval(hoge);
+	    }
+	}, 500);
 }
