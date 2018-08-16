@@ -3,11 +3,10 @@ var fps = 8;		//fps
 var msgsp = 100;	//メッセージスピード
 var id = "box2";	//テキストを表示するタグのID
 var id2 = "box1";	//図表を表示するタグのID
+var id3 = "box3";	//メモを表示するタグのID
 var flagTXT=0;//ファイルを読み込んだかどうかのフラグ
 var txt = [];
-var Image = [];//一度読みこんだ画像の配置場所を格納
-var IM = 0;//読み込んだ画像の数
-var IMnow = 0;//今読み込んでる画像が前から数えて何枚目か
+var MEMO="";
 //初期化
 var pc = 0;//txtの何行目を読んでいるか
 var world = null;
@@ -39,14 +38,7 @@ if(window.File) {
 				world.innerHTML=txt[pc];
 			}else{
 				console.log("画像表示します pc:"+pc);
-				//配列が画像表示を示す場合
-				IMnow++;
-				if(IMnow>IM){//今表示しようとしてる画像の枝番が画像の最大枝番より多い→新たな画像
-					Image[IM]=txt[pc];//読み込む画像の所在を格納
-					IM++;//画像の枚数を1増やす
-				}
 				writeImage(txt[pc]);
-				console.log("Image[ ]:"+Image);
 				//textahead();//文章読み進める
 			}
 		}
@@ -92,7 +84,6 @@ function textback(){
 			for(i=pc-1;i>0;i--){
 				if(txt[i].charAt(0)=="★"){
 					writeImage(txt[i]);
-					console.log("Image[ ]:"+Image);
 					pc--;
 					return;
 				}
@@ -101,39 +92,96 @@ function textback(){
 			//初期化
 			writenullImage();
 			pc--;
-		}else{
+		}else if(txt[pc].charAt(0)=="☆"){
+			console.log("☆入りました pc:"+pc);
+			//前の☆までの間にあるメモを全て表示
+			//まず前の星を探す
+			for(i=pc-1;i>-1;i--){
+				console.log("for☆入りました i:"+i);
+				if(txt[i].charAt(0)=="☆"){
+					console.log("☆見つけました pc:"+pc);
+					break;
+				}
+				if(i==0){
+					MEMO="";
+					cleanMemo();
+					console.log("最初の☆ pc:"+pc);
+					pc--;
+					return;
+				}
+			}
+			MEMO="";
+			for(k=i;k<pc;k++){
+				if(txt[k].charAt(0)=="〇"){
+					MEMO+=txt[k].slice(1)+"<br>";
+				}
+			}
+			writeMemo();
 			pc--;
+		//}else if(txt[pc].charAt(0)=="〇"){
+			//一行分消す？
+			//とりあえず放置で
+		//	pc--;
+		}else{
+			//文章だった場合は前の文章を表示
+			for(i=pc-1;i>=0;i--){
+				if(txt[i].charAt(0)!="★"&&txt[i].charAt(0)!="☆"&&txt[i].charAt(0)!="〇"){
+					world.innerHTML=txt[i];
+					pc--;
+					return;
+				}else{
+					console.log("txt:"+txt[i]);
+				}
+			}
+			console.log("終わりませんでした pc:"+pc);
+			//for文内で終わらない＝一番最初の文章
+			//初期化
+			if(pc>0)pc--;
+			/*
+			pc--;
+			console.log("文章表示しますZ pc:"+pc);
 			if(txt[pc].charAt(0)=="★"){//一つ前の文章が図の場合はその前の文章を表示
-				world.innerHTML=txt[pc-1];
+				//world.innerHTML=txt[pc-1];
+			}else if(txt[pc].charAt(0)=="☆"){
+				//world.innerHTML=txt[pc-1];
+			}else if(txt[pc].charAt(0)=="〇"){
+				//world.innerHTML=txt[pc-1];
 			}else{
 				console.log("文章表示します pc:"+pc);
 				//配列がテキストの場合
 				//ただ一行読むだけ
 				world.innerHTML=txt[pc];
 			}
+			*/
 		}
 	}
 }
 
-//一度読みこんだ図の配列を作ってテキスト戻る時に参照するの良さそう
 
 function textahead(){
 	pc++;//一行進める
 	console.log("textahead呼ばれました");
 	if(flagTXT==1) {
 		if(pc < txt.length) {
-			if(txt[pc].charAt(0)!="★"){
-				console.log("文章表示します pc:"+pc);
-			    //配列がテキストの場合
-				//ただ一行読むだけ
-				world.innerHTML=txt[pc];
-			}else{
+			if(txt[pc].charAt(0)=="★"){
 				console.log("画像表示します pc:"+pc);
 				//配列が画像表示を示す場合
 				//単純に表示するのみ
 				writeImage(txt[pc]);
-				console.log("Image[ ]:"+Image);
 				//textahead();//文章読み進める
+			}else if(txt[pc].charAt(0)=="☆"){
+				//メモ消去
+				MEMO="";
+				cleanMemo();
+			}else if(txt[pc].charAt(0)=="〇"){
+				//メモ追加
+				MEMO+=txt[pc].slice(1)+"<br>";
+				writeMemo();
+			}else{
+				console.log("文章表示します pc:"+pc);
+			    //配列がテキストの場合
+				//ただ一行読むだけ
+				world.innerHTML=txt[pc];
 			}
 		}else if(flagTXT==0){
 			return;
@@ -155,6 +203,17 @@ function writeImage(t) {
 function writenullImage() {
     world=document.getElementById(id2);
 	world.innerHTML = '';
+	world=document.getElementById(id);
+}
+function writeMemo() {
+    world=document.getElementById(id3);
+	world.innerHTML = MEMO;
+	world=document.getElementById(id);
+}
+
+function cleanMemo() {
+    world=document.getElementById(id3);
+	world.innerHTML = "";
 	world=document.getElementById(id);
 }
 
