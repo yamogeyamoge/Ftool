@@ -88,23 +88,30 @@ function textback(){
 		if(txt[pc].charAt(0)=="★"){
 			//今指してる文章が図ならちょうど区切りなので前の画像を表示する
 			//現在表示されてる画像より一枚前を表示するのみでいい
-			//現在表示されてる画像の番号を保持しておく
-			if(IMnow==1){//一番最初の画像
-				writenullImage();//初期化
-				IMnow=0;
-			}else{
-				IMnow--;
-				console.log("画像戻り中です IMnow:"+IMnow);
-				writeImage(Image[IMnow-1]);
-				console.log("画像戻りました IMnow:"+IMnow);
+			//textから★を持つ文字列を検索して表示
+			for(i=pc-1;i>0;i--){
+				if(txt[i].charAt(0)=="★"){
+					writeImage(txt[i]);
+					console.log("Image[ ]:"+Image);
+					pc--;
+					return;
+				}
 			}
+			//for文内で終わらない＝一番最初の画像の場合
+			//初期化
+			writenullImage();
+			pc--;
 		}else{
-			console.log("文章表示します pc:"+pc);
-			//配列がテキストの場合
-			//ただ一行読むだけ
-			world.innerHTML=txt[pc];
+			pc--;
+			if(txt[pc].charAt(0)=="★"){//一つ前の文章が図の場合はその前の文章を表示
+				world.innerHTML=txt[pc-1];
+			}else{
+				console.log("文章表示します pc:"+pc);
+				//配列がテキストの場合
+				//ただ一行読むだけ
+				world.innerHTML=txt[pc];
+			}
 		}
-		pc--;
 	}
 }
 
@@ -123,11 +130,7 @@ function textahead(){
 			}else{
 				console.log("画像表示します pc:"+pc);
 				//配列が画像表示を示す場合
-				IMnow++;
-				if(IMnow>IM){//今表示しようとしてる画像の枝番が画像の最大枝番より多い→新たな画像
-					Image[IM]=txt[pc];//読み込む画像の所在を格納
-					IM++;//画像の枚数を1増やす
-				}
+				//単純に表示するのみ
 				writeImage(txt[pc]);
 				console.log("Image[ ]:"+Image);
 				//textahead();//文章読み進める
