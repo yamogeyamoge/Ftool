@@ -2,8 +2,8 @@
 	position:static;
     padding: 0.5em 1em;/*内側の余白*/
     margin: 0 0;/*外側の余白*/
-	width:40em;/*横幅*/
-	height:20em;/*立幅*/
+	width:480px;/*横幅*/
+	height:360px;/*立幅*/
     font-weight: bold;
     border: solid 3px #000000;/*枠線の色*/
 }
@@ -16,8 +16,8 @@
 	position:static;
     padding: 0.5em 1em;
     margin: 0.5em 0;
-	width:40em;
-	height:5em;
+	width:480px;/*横幅*/
+	height:90px;
     font-weight: bold;
     border: solid 3px #000000;
 }
@@ -29,11 +29,11 @@
 .box3 {
 	padding: 0.5em 1em;
     margin: 0.5em 0;
-	width:15em;
-	height:31em;
+	width:240px;/*横幅*/
+	height:475px;/*立幅*/
  	position:absolute;/*位置を固定*/
-    left:43em;/*左上頂点の位置*/
-	top:0.5em;/*左上頂点の位置*/
+    left:530px;/*左上頂点の位置*/
+	top:5px;/*左上頂点の位置*/
 	border: solid 3px #95ccff;
     border-radius: 8px;
 }
