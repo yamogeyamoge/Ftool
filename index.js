@@ -81,7 +81,7 @@ function textback(){
 			//今指してる文章が図ならちょうど区切りなので前の画像を表示する
 			//現在表示されてる画像より一枚前を表示するのみでいい
 			//textから★を持つ文字列を検索して表示
-			for(i=pc-1;i>0;i--){
+			for(i=pc-1;i>=0;i--){
 				if(txt[i].charAt(0)=="★"){
 					writeImage(txt[i]);
 					pc--;
