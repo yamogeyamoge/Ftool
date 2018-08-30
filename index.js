@@ -1,8 +1,8 @@
 ﻿//設定用変数
 var fps = 8;		//fps
 var msgsp = 100;	//メッセージスピード
-var id = "box2";	//テキストを表示するタグのID
-var id2 = "box1";	//図表を表示するタグのID
+var id = "box1";	//図表を表示するタグのID
+var id2 = "box2";	//テキストを表示するタグのID
 var id3 = "box3";	//メモを表示するタグのID
 var flagTXT=0;//ファイルを読み込んだかどうかのフラグ
 var txt = [];
@@ -63,7 +63,7 @@ txt[5] = "よそよそしい頭文字などはとても使う気にならない�
 
 onload = function() {
     if (world === null) {
-	world = document.getElementById(id);
+	world = document.getElementById(id2);
 	}
 };
 
@@ -177,6 +177,11 @@ function textahead(){
 				//メモ追加
 				MEMO+=txt[pc].slice(1)+"<br>";
 				writeMemo();
+			}else if(txt[pc].charAt(0)=="◎"){
+				//クイズモード
+				console.log("◎入りました pc:"+pc);
+				//◎が続くまで文章を表示
+				writeQuiz(txt[pc]);
 			}else{
 				console.log("文章表示します pc:"+pc);
 			    //配列がテキストの場合
@@ -194,27 +199,43 @@ function textahead(){
 
 function writeImage(t) {
     t=t.slice(1);
-    world=document.getElementById(id2);
+    world=document.getElementById(id1);
 	world.innerHTML = '<img src='+t+' alt="サンプル画像">';
 	//tは変数なので"t"ではなく+t+で追加する
-	world=document.getElementById(id);
+	world=document.getElementById(id2);
 }
 
 function writenullImage() {
-    world=document.getElementById(id2);
+    world=document.getElementById(id1);
 	world.innerHTML = '';
-	world=document.getElementById(id);
+	world=document.getElementById(id2);
 }
 function writeMemo() {
     world=document.getElementById(id3);
 	world.innerHTML = MEMO;
-	world=document.getElementById(id);
+	world=document.getElementById(id2);
 }
 
 function cleanMemo() {
     world=document.getElementById(id3);
 	world.innerHTML = "";
-	world=document.getElementById(id);
+	world=document.getElementById(id2);
+}
+
+
+function writeQuiz(t) {
+	console.log("writeQuiz入りました pc:"+pc);
+    t=t.slice(1);
+	//次の文章も◎→クイズの文章
+	while(txt[pc+1].charAt(0)=="◎"){
+		pc++;
+		t+="<br>"+txt[pc].slice(1);
+	}
+	console.log("t:"+t);
+	world=document.getElementById(id2);
+	world.innerHTML = t;
+	//選択肢としてラジオボタン表示
+	radioON();
 }
 
 /*

@@ -1,6 +1,9 @@
 ﻿<head>
 <title>文書のタイトル</title>
 <link rel="stylesheet" type="text/css" href="education.css">
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("jquery", "1.7");</script>
+
 </head>
 <body>
 <div class="box1">
@@ -14,6 +17,10 @@
     <span class="box-title">メモ</span>
     <span id="box3">box3</p>
 </div>
+<div class="box4" id="quiz">
+    <span id="box4"></p>
+</div>
+
 <INPUT TYPE="button" VALUE="戻る" onClick="textback();">
 <INPUT TYPE="button" VALUE="進む" onClick="textahead();">
 <!--<script>
@@ -23,4 +30,5 @@ var box2 = document.getElementById('box2');
 box2.innerHTML = 'happy';
 </script>-->
 <script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="radio.js"></script>
 </body>
