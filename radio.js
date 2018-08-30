@@ -11,3 +11,7 @@
 	$("#quiz").append($input).append($label);
 
 }
+
+function radioOFF(){
+	$("#quiz").empty();
+}
