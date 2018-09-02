@@ -17,16 +17,41 @@
     <span class="box-title">目次</span>
     <span id="box3"></p>
 </div>
-<!--box2の中に選択肢を表示してた名残
-<div class="box4" id="quiz">
-    <span id="box4"></p>
-</div>
-<script type="text/javascript" src="radio.js"></script>
--->
 
 
 <INPUT TYPE="button" VALUE="戻る" onClick="textback();">
 <INPUT TYPE="button" VALUE="進む" onClick="textahead();">
+
+
+<!--ここからクイズと計測結果を表示する部分-->
+<div class="box5">
+	<p>DF計測項目</p>
+	<table id="DFtable" class="tablelines">
+	</table>
+	<p>TF計測項目</p>
+	<table id="TFtable" class="tablelines">
+	</table>
+</div>
+
+<div class="box6">
+	<span id="box6">box6</p>
+</div>
+
+<div class="box4" id="quiz">
+    <span id="box4"></p>
+</div>
+<script type="text/javascript" src="radio.js"></script>
+
+
+<div class ="box7">
+	<input type="file" name="テキスト読み込み" id="selectQUIZ" />
+</div>
+
+<div class ="box8">
+<INPUT TYPE="button" VALUE="戻る" onClick="quizback();">
+<INPUT TYPE="button" VALUE="進む" onClick="quizahead();">
+</div>
+
 <!--<script>
 var box1 = document.getElementById('box1');
 box1.innerHTML = '<img src="banner.jpg" alt="サンプル画像">';
@@ -34,4 +59,5 @@ var box2 = document.getElementById('box2');
 box2.innerHTML = 'happy';
 </script>-->
 <script type="text/javascript" src="indexmiddle.js"></script>
+<script type="text/javascript" src="quizmiddle.js"></script>
 </body>

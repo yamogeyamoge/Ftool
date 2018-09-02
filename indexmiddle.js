@@ -1,8 +1,6 @@
 ﻿//中級用のindex.js
 
 //設定用変数
-var fps = 8;		//fps
-var msgsp = 100;	//メッセージスピード
 var id1 = "box1";	//図表を表示するタグのID
 var id2 = "box2";	//テキストを表示するタグのID
 var id3 = "box3";	//メモを表示するタグのID
@@ -196,16 +194,6 @@ function textahead(){
 				//メモ追加
 				MEMO+=txt[pc].slice(1)+"<br>";
 				writeMemo();
-			}else if(txt[pc].charAt(0)=="◎"){
-				//クイズモード
-				console.log("◎入りました pc:"+pc);
-				//◎が続くまで文章を表示
-				writeQuiz(txt[pc]);
-			}else if(txt[pc].charAt(0)=="●"){
-				//回答モード
-				console.log("●入りました pc:"+pc);
-				//ラジオボタンの値によって表示内容を変更
-				writeAnswer(txt[pc]);
 			}else{
 				console.log("文章表示します pc:"+pc);
 			    //配列がテキストの場合
@@ -248,88 +236,6 @@ function cleanMemo() {
 	world=document.getElementById(id2);
 }
 
-
-function writeQuiz(t) {
-	console.log("writeQuiz入りました pc:"+pc);
-    t=t.slice(1);
-	//次の文章も◎→クイズの文章
-	while(txt[pc+1].charAt(0)=="◎"){
-		pc++;
-		t+="<br>"+txt[pc].slice(1);
-	}
-	console.log("t:"+t);
-	world=document.getElementById(id2);
-	world.innerHTML = t;
-	//選択肢としてラジオボタン表示
-	radioON();
-}
-
-function writeAnswer(t) {
-	console.log("writeAnswer入りました pc:"+pc);
-    //ラジオボタンの値によって対処を変更
-    var num = $('input[name="test"]:checked').val();
-	console.log("ラジオボタンの値:"+num);
-	if(num==1){
-		t=t.slice(1);
-		//冒頭が▽→同じ回答の文章
-		console.log("txt[pc+1]:"+txt[pc+1]);
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-			t+="<br>"+txt[pc].slice(1);
-		}
-		//後に続く二つの回答の先へpcを進める必要がある
-		console.log("Skip!! txt[pc+1]:"+txt[pc+1]);
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		console.log("SkipFinish!! txt[pc]:"+txt[pc]);
-	}else if(num==2){
-	    //まず次の●まで文章を進める
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++//前回の回答の文末まで来てるので一個進める
-		console.log("SkipFinish!! txt[pc]:"+txt[pc]);
-		t=txt[pc].slice(1);
-		//冒頭が▽→同じ回答の文章
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-			t+="<br>"+txt[pc].slice(1);
-		}
-		//回答3の先へpcを進める
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-	}else if(num==3){
-		//まず次の次の●まで文章を進める
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++//前回の回答の文末まで来てるので一個進める
-		console.log("SkipFinish!! txt[pc]:"+txt[pc]);
-		t=txt[pc].slice(1);
-		//冒頭が▽→同じ回答の文章
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-			t+="<br>"+txt[pc].slice(1);
-		}
-	}
-	console.log("t:"+t);
-	world=document.getElementById(id2);
-	world.innerHTML = t;
-	//ラジオボタン非表示
-	radioOFF();
-}
 			
 function mokujijump(t) {
 	pc=t-1;
