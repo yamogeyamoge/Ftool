@@ -38,7 +38,7 @@
 .box3 {
 	padding: 0.5em 1em;
     margin: 0.5em 0;
-	width:240px;/*横幅*/
+	width:340px;/*横幅*/
 	height:475px;/*立幅*/
  	position:absolute;/*位置を固定*/
     left:530px;/*左上頂点の位置*/
