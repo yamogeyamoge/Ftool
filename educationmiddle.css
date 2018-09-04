@@ -1,0 +1,110 @@
+﻿.box1 {
+	position:static;
+    padding: 0.5em 1em;/*内側の余白*/
+    margin: 0 0;/*外側の余白*/
+	width:480px;/*横幅*/
+	height:360px;/*立幅*/
+    font-weight: bold;
+    border: solid 3px #000000;/*枠線の色*/
+}
+.box1 p {
+    margin: 0; 
+    padding: 0;
+}
+
+.box2 {	
+	position:static;
+    padding: 0.5em 1em;
+    margin: 0.5em 0;
+	width:480px;/*横幅*/
+	height:90px;
+    font-weight: bold;
+    border: solid 3px #000000;
+}
+.box2 p {
+    margin: 0; 
+    padding: 0;
+}
+
+
+.box3 {
+	padding: 0.5em 1em;
+    margin: 0.5em 0;
+	width:120px;/*横幅*/
+	height:475px;/*立幅*/
+ 	position:absolute;/*位置を固定*/
+    left:530px;/*左上頂点の位置*/
+	top:5px;/*左上頂点の位置*/
+	border: solid 3px #95ccff;
+    border-radius: 8px;
+}
+.box3 .box-title {/*枠のタイトル*/
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.box3 p {
+    margin: 0; 
+    padding: 0;
+}
+
+
+.box5 {	
+    padding: 0.5em 1em;/*内側の余白*/
+    margin: 0 0;/*外側の余白*/
+	width:480px;/*横幅*/
+	height:360px;/*立幅*/
+	position:absolute;/*位置を固定*/
+    left:700px;/*左上頂点の位置*/
+	top:5px;/*左上頂点の位置*/
+    font-weight: bold;
+    border: solid 3px #000000;/*枠線の色*/
+}
+
+
+.box6 {	
+	padding: 0.5em 1em;
+    margin: 0.5em 0;
+	width:480px;/*横幅*/
+	height:90px;
+	position:absolute;/*位置を固定*/
+    left:700px;/*左上頂点の位置*/
+	top:385px;/*左上頂点の位置*/
+    font-weight: bold;
+    border: solid 3px #000000;
+}
+
+.box4 {
+	width:115px;/*横幅*/
+	height:20px;/*立幅*/
+ 	position:absolute;/*位置を固定*/
+    left:1100px;/*左上頂点の位置*/
+	top:470px;/*左上頂点の位置*/
+	font-weight: bold;
+}
+
+
+.box7 {	
+	padding: 0.5em 1em;
+    margin: 0.5em 0;
+	position:absolute;/*位置を固定*/
+    left:700px;/*左上頂点の位置*/
+	top:495px;/*左上頂点の位置*/
+    font-weight: bold;
+}
+
+.box8 {	
+	padding: 0.5em 1em;
+    margin: 0.5em 0;
+	position:absolute;/*位置を固定*/
+    left:1100px;/*左上頂点の位置*/
+	top:495px;/*左上頂点の位置*/
+    font-weight: bold;
+}

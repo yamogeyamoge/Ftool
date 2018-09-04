@@ -26,6 +26,15 @@
     padding: 0;
 }
 
+.box4 {
+	width:115px;/*横幅*/
+	height:20px;/*立幅*/
+ 	position:absolute;/*位置を固定*/
+    left:400px;/*左上頂点の位置*/
+	top:480px;/*左上頂点の位置*/
+	font-weight: bold;
+}
+
 .box3 {
 	padding: 0.5em 1em;
     margin: 0.5em 0;

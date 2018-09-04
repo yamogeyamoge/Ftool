@@ -1,0 +1,29 @@
+﻿◎DFとTFの正しい組み合わせは次の内どれ？
+◎a.DVD情報 b.DVD明細情報 c.DVD登録 d.DVD削除 e.DVD検索 f.DVD情報印刷
+◎1:DF…a,b TF…c,d,e,f
+◎2:DF…a TF…b,c,d,e,f
+◎3:DF…a,b,c TF…d,e,f
+●正解！　正解:a
+▽DFとして判別されるのはデータのまとまりであるDVD情報とDVD明細情報です。
+●不正解！　正解:a
+▽DFとして判別されるのはデータのまとまりであるDVD情報とDVD明細情報です。
+●不正解！　正解:a
+▽DFとして判別されるのはデータのまとまりであるDVD情報とDVD明細情報です。
+▲1DVD情報:A,B,C,D,E
+▲2DVD明細情報:A,B,C,D,E
+△1DVD登録:A:B:C:D
+△2DVD削除:A:B:C:D
+△3DVD検索:A:B:C:D
+△4DVD情報印刷:A:B:C:D
+◎a.DVD情報 b.DVD明細情報 c.DVD登録 d.DVD削除 e.DVD検索 f.DVD情報印刷
+◎1:DF…a,b TF…c,d,e,f
+◎2:DF…a TF…b,c,d,e,f
+◎3:DF…a,b,c TF…d,e,f
+●正解！　正解:a
+▽DFとして判別されるのはデータのまとまりであるDVD情報とDVD明細情報です。
+●不正解！　正解:a
+▽DFとして判別されるのはデータのまとまりであるDVD情報とDVD明細情報です。
+●不正解！　正解:a
+▽DFとして判別されるのはデータのまとまりであるDVD情報とDVD明細情報です。
+▲1DVD情報:B,B,C,D,E
+△3DVD検索:A:C:C:D

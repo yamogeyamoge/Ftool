@@ -1,7 +1,7 @@
-﻿//設定用変数
-var fps = 8;		//fps
-var msgsp = 100;	//メッセージスピード
-var id = "box1";	//図表を表示するタグのID
+﻿//中級用のindex.js
+
+//設定用変数
+var id1 = "box1";	//図表を表示するタグのID
 var id2 = "box2";	//テキストを表示するタグのID
 var id3 = "box3";	//メモを表示するタグのID
 var flagTXT=0;//ファイルを読み込んだかどうかのフラグ
@@ -28,6 +28,23 @@ if(window.File) {
         reader.onload = function() {
 			console.log("reader.result:"+reader.result); //TXTデータ(string)
 			txt = reader.result.split("\n");
+			//まず目次を設定する
+			//機能の最初に「▼DVD登録」と記載するよう義務付け
+			//入力されたテキストを洗い出し、「▼」の後のテキストを受け取りボタンにする
+			//そのボタンを押すとその機能の説明まで飛ぶ
+			//ボタンに行数を保持させる
+			//txt内の▼を探す
+			for(var t=0;t<txt.length;t++){
+				if(txt[t].charAt(0)=="▼"){
+					console.log("▼発見 t:"+t);
+					//txt[t]という名前のボタンを設置
+					//クリックするとpc=tにする関数mokujijunp(t)が実行される
+					var h='<INPUT TYPE="button" VALUE="'+txt[t].slice(1)+'" onClick="mokujijump('+t+');"><br>';
+					console.log("h:"+h);
+					$("#mokuji").append(h);
+				}
+			}
+
 			console.log("txt[0]:"+txt[0]);
 			flagTXT=1;
 			//一行目読み込む
@@ -177,16 +194,6 @@ function textahead(){
 				//メモ追加
 				MEMO+=txt[pc].slice(1)+"<br>";
 				writeMemo();
-			}else if(txt[pc].charAt(0)=="◎"){
-				//クイズモード
-				console.log("◎入りました pc:"+pc);
-				//◎が続くまで文章を表示
-				writeQuiz(txt[pc]);
-			}else if(txt[pc].charAt(0)=="●"){
-				//回答モード
-				console.log("●入りました pc:"+pc);
-				//ラジオボタンの値によって表示内容を変更
-				writeAnswer(txt[pc]);
 			}else{
 				console.log("文章表示します pc:"+pc);
 			    //配列がテキストの場合
@@ -215,6 +222,8 @@ function writenullImage() {
 	world.innerHTML = '';
 	world=document.getElementById(id2);
 }
+
+
 function writeMemo() {
     world=document.getElementById(id3);
 	world.innerHTML = MEMO;
@@ -227,89 +236,14 @@ function cleanMemo() {
 	world=document.getElementById(id2);
 }
 
-
-function writeQuiz(t) {
-	console.log("writeQuiz入りました pc:"+pc);
-    t=t.slice(1);
-	//次の文章も◎→クイズの文章
-	while(txt[pc+1].charAt(0)=="◎"){
-		pc++;
-		t+="<br>"+txt[pc].slice(1);
-	}
-	console.log("t:"+t);
-	world=document.getElementById(id2);
-	world.innerHTML = t;
-	//選択肢としてラジオボタン表示
-	radioON();
-}
-
-function writeAnswer(t) {
-	console.log("writeAnswer入りました pc:"+pc);
-    //ラジオボタンの値によって対処を変更
-    var num = $('input[name="test"]:checked').val();
-	console.log("ラジオボタンの値:"+num);
-	if(num==1){
-		t=t.slice(1);
-		//冒頭が▽→同じ回答の文章
-		console.log("txt[pc+1]:"+txt[pc+1]);
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-			t+="<br>"+txt[pc].slice(1);
-		}
-		//後に続く二つの回答の先へpcを進める必要がある
-		console.log("Skip!! txt[pc+1]:"+txt[pc+1]);
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		console.log("SkipFinish!! txt[pc]:"+txt[pc]);
-	}else if(num==2){
-	    //まず次の●まで文章を進める
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++//前回の回答の文末まで来てるので一個進める
-		console.log("SkipFinish!! txt[pc]:"+txt[pc]);
-		t=txt[pc].slice(1);
-		//冒頭が▽→同じ回答の文章
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-			t+="<br>"+txt[pc].slice(1);
-		}
-		//回答3の先へpcを進める
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-	}else if(num==3){
-		//まず次の次の●まで文章を進める
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++;//次の●へpcを合わせる
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-		}
-		pc++//前回の回答の文末まで来てるので一個進める
-		console.log("SkipFinish!! txt[pc]:"+txt[pc]);
-		t=txt[pc].slice(1);
-		//冒頭が▽→同じ回答の文章
-		while(txt[pc+1].charAt(0)=="▽"){
-			pc++;
-			t+="<br>"+txt[pc].slice(1);
-		}
-	}
-	console.log("t:"+t);
-	world=document.getElementById(id2);
-	world.innerHTML = t;
-	//ラジオボタン非表示
-	radioOFF();
-}
 			
+function mokujijump(t) {
+	pc=t-1;
+	//pcに指定の行の1つ前を指させて読み込ませる
+	//図画面を初期化しておこう
+	writenullImage();
+	textahead();
+}
 
 /*
 onload = function() {
