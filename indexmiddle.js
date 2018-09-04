@@ -129,20 +129,20 @@ function textback(){
 			}
 			MEMO="";
 			for(k=i;k<pc;k++){
-				if(txt[k].charAt(0)=="〇"){
+				if(txt[k].charAt(0)=="○"){
 					MEMO+=txt[k].slice(1)+"<br>";
 				}
 			}
 			writeMemo();
 			pc--;
-		//}else if(txt[pc].charAt(0)=="〇"){
+		//}else if(txt[pc].charAt(0)=="○"){
 			//一行分消す？
 			//とりあえず放置で
 		//	pc--;
 		}else{
 			//文章だった場合は前の文章を表示
 			for(i=pc-1;i>=0;i--){
-				if(txt[i].charAt(0)!="★"&&txt[i].charAt(0)!="☆"&&txt[i].charAt(0)!="〇"){
+				if(txt[i].charAt(0)!="★"&&txt[i].charAt(0)!="☆"&&txt[i].charAt(0)!="○"){
 					world.innerHTML=txt[i];
 					pc--;
 					return;
@@ -161,7 +161,7 @@ function textback(){
 				//world.innerHTML=txt[pc-1];
 			}else if(txt[pc].charAt(0)=="☆"){
 				//world.innerHTML=txt[pc-1];
-			}else if(txt[pc].charAt(0)=="〇"){
+			}else if(txt[pc].charAt(0)=="○"){
 				//world.innerHTML=txt[pc-1];
 			}else{
 				console.log("文章表示します pc:"+pc);
@@ -190,7 +190,7 @@ function textahead(){
 				//メモ消去
 				MEMO="";
 				cleanMemo();
-			}else if(txt[pc].charAt(0)=="〇"){
+			}else if(txt[pc].charAt(0)=="○"){
 				//メモ追加
 				MEMO+=txt[pc].slice(1)+"<br>";
 				writeMemo();
